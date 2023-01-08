@@ -12,14 +12,14 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh './scripts/test.sh'
+                sudo sh './scripts/test.sh'
             }
         }
         stage('Deliver') {
             steps {
-                sh './scripts/deliver.sh'
+                sudo sh './scripts/deliver.sh'
                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                sh './jenkins/scripts/kill.sh'
+                sudo sh './jenkins/scripts/kill.sh'
             }
         }
     }
