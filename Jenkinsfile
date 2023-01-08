@@ -12,14 +12,17 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sudo sh './scripts/test.sh'
+                 sh "chmod +x -R ${env.WORKSPACE}"
+                 sh './scripts/test.sh'
             }
         }
         stage('Deliver') {
             steps {
-                sudo sh './scripts/deliver.sh'
+                sh "chmod +x -R ${env.WORKSPACE}"
+                sh './scripts/deliver.sh'
                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                sudo sh './jenkins/scripts/kill.sh'
+                sh "chmod +x -R ${env.WORKSPACE}"
+                sh './jenkins/scripts/kill.sh'
             }
         }
     }
